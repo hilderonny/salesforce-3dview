@@ -12,3 +12,4 @@ Beschreibung
 - [ ] Implementierung
 - [ ] Unit-Tests schreiben
 - [ ] Dokumentation aktualiseren
+- [ ] Paketversion veröffentlichen
