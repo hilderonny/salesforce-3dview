@@ -10,6 +10,7 @@ assignees: hilderonny
 Beschreibung
 
 - [ ] Implementierung
+- [ ] package.xml erweitern
 - [ ] Unit-Tests schreiben
 - [ ] Dokumentation aktualiseren
 - [ ] Paketversion veröffentlichen
