@@ -12,7 +12,6 @@
             "default": false
         }
     ],
-    "namespace": "hilderonny",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "50.0",
     "packageAliases": {
