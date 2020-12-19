@@ -2,20 +2,17 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
-        },
-        {
-            "path": "force-app/",
             "package": "salesforce-3dview",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
-            "default": false
+            "default": true
         }
     ],
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "50.0",
     "packageAliases": {
-        "salesforce-3dview": "0Ho3X000000fxbhSAA"
+        "salesforce-3dview": "0Ho3X000000fxbhSAA",
+        "salesforce-3dview@0.1.0-1": "04t3X000002xTmtQAE"
     }
 }
