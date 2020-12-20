@@ -8,5 +8,14 @@
         <members>RHTDV_ModelView</members>
         <name>AuraDefinitionBundle</name>
     </types>
+    <types>
+        <members>Product2.RHTDV_ModelDocument__c</members>
+        <name>CustomFields</name>
+    </types>
+	<types>
+		<members>RHTDV_ModelEditor</members>
+		<members>RHTDV_ModelViewer</members>
+		<name>PermissionSet</name>
+	</types>
     <version>50.0</version>
 </Package>

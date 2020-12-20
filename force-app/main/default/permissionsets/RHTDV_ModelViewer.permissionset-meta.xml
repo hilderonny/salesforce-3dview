@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Permission to view 3D view of products</description>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Product2.RHTDV_ModelDocument__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Product 3D Model Viewer</label>
+</PermissionSet>
