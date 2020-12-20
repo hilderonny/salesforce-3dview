@@ -12,6 +12,7 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "50.0",
     "packageAliases": {
-        "salesforce-3dview": "0Ho3X000000fxbmSAA"
+        "salesforce-3dview": "0Ho3X000000fxbmSAA",
+        "salesforce-3dview@0.1.0-1": "04t3X000002xTmyQAE"
     }
 }
