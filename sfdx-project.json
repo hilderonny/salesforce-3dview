@@ -2,20 +2,18 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
-        },
-        {
-            "path": "./force-app/",
-            "package": "3DView",
+            "package": "salesforce-3dview",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
-            "default": false
+            "default": true
         }
     ],
-    "namespace": "hilderonny",
+    "namespace": "haer",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "50.0",
     "packageAliases": {
-        "3DView": "0Ho3X000000fxbXSAQ"
+        "salesforce-3dview": "0Ho3X000000fxbmSAA",
+        "salesforce-3dview@0.1.0-1": "04t3X000002xTmyQAE",
+        "salesforce-3dview@0.1.0-2": "04t3X000002xTn3QAE"
     }
 }
