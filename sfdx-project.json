@@ -1,4 +1,9 @@
 {
+    "namespace": "HaeR",
+    "packageAliases": {
+        "salesforce-3dview": "0Ho3X000000fxc1SAA",
+        "salesforce-3dview@0.1.0-1": "04t3X000002xTn8QAE"
+    },
     "packageDirectories": [
         {
             "path": "force-app",
@@ -8,12 +13,6 @@
             "default": true
         }
     ],
-    "namespace": "haer",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "50.0",
-    "packageAliases": {
-        "salesforce-3dview": "0Ho3X000000fxbmSAA",
-        "salesforce-3dview@0.1.0-1": "04t3X000002xTmyQAE",
-        "salesforce-3dview@0.1.0-2": "04t3X000002xTn3QAE"
-    }
+    "sourceApiVersion": "50.0"
 }
