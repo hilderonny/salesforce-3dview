@@ -4,6 +4,10 @@
         <members>RHTDV_ModelViewApexController</members>
         <name>ApexClass</name>
     </types>
+	<types>
+		<members>RHTDV_ContentDocumentTrigger</members>
+		<name>ApexTrigger</name>
+	</types>
     <types>
         <members>RHTDV_ModelView</members>
         <name>AuraDefinitionBundle</name>
