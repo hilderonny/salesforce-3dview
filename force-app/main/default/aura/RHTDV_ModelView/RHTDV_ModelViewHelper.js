@@ -1,73 +1,65 @@
 ({
     animate: function() {
+        requestAnimationFrame(() => this.animate());
+        if (this.container.offsetWidth != this.width || this.container.offsetHeight != this.height) this.resize();
+        
+        this.cube.rotation.x += 0.01;
+        this.cube.rotation.y += 0.01;
 
+        this.controls.update();
+        this.renderer.render(this.scene, this.camera);
+    },
+    /**
+     * Zoomt die übergebenen Objekte in den Bildausschnitt.
+     * Von https://discourse.threejs.org/t/camera-zoom-to-fit-object/936/24
+     */
+    fitCameraToSelection: function(selection) {
+        const box = new THREE.Box3();
+        for( const object of selection ) box.expandByObject( object );
+        const size = box.getSize( new THREE.Vector3() );
+        const center = box.getCenter( new THREE.Vector3() );
+        const maxSize = Math.max( size.x, size.y, size.z );
+        const fitHeightDistance = maxSize / ( 2 * Math.atan( Math.PI * this.camera.fov / 360 ) );
+        const fitWidthDistance = fitHeightDistance / this.camera.aspect;
+        const fitOffset = 1.5;
+        const distance = fitOffset * Math.max( fitHeightDistance, fitWidthDistance );
+        const direction = this.controls.target.clone().sub(this.camera.position).normalize().multiplyScalar(distance);
+        this.controls.maxDistance = distance * 10;
+        this.controls.target.copy( center );
+        this.camera.near = distance / 100;
+        this.camera.far = distance * 100;
+        this.camera.updateProjectionMatrix();
+        this.camera.position.copy(this.controls.target).sub(direction);
+        this.controls.update();
     },
     /**
      * Richtet die ThreeJS Szene ein. Wird einmalig beim Start aufgerufen.
      */
     initThreeJsScene: function(component) {
-
-        console.log(this);
+        this.container = document.querySelector('.modelcontainer');
         
-        const container = document.querySelector('.modelcontainer');
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera( 75, this.container.offsetWidth / this.container.offsetHeight, 0.1, 1000 );
+        this.renderer = new THREE.WebGLRenderer();
         
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera( 75, container.offsetWidth / container.offsetHeight, 0.1, 1000 );
-        const renderer = new THREE.WebGLRenderer();
+        this.controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+        this.controls.autoRotate = true;
         
-        const controls = new THREE.OrbitControls( camera, renderer.domElement );
-        controls.autoRotate = true;
-        
-        let width, height;
-        renderer.setSize(container.offsetWidth, container.offsetHeight);
-        container.appendChild(renderer.domElement);
+        this.renderer.setSize(this.container.offsetWidth, this.container.offsetHeight);
+        this.container.appendChild(this.renderer.domElement);
         
         const ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
-        scene.add( ambientLight );
+        this.scene.add( ambientLight );
         const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-        scene.add( directionalLight );
+        this.scene.add( directionalLight );
 
-                
+        // Würfel für Demo-Zwecke                
         const geometry = new THREE.BoxGeometry();
         const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         this.cube = new THREE.Mesh( geometry, material );
-        scene.add(this.cube);
+        this.scene.add(this.cube);
 
-        
-        // Von https://discourse.threejs.org/t/camera-zoom-to-fit-object/936/24
-        function fitCameraToSelection(selection, fitOffset = 1.2 ) {
-            
-            const box = new THREE.Box3();
-            
-            for( const object of selection ) box.expandByObject( object );
-            
-            const size = box.getSize( new THREE.Vector3() );
-            const center = box.getCenter( new THREE.Vector3() );
-            
-            const maxSize = Math.max( size.x, size.y, size.z );
-            const fitHeightDistance = maxSize / ( 2 * Math.atan( Math.PI * camera.fov / 360 ) );
-            const fitWidthDistance = fitHeightDistance / camera.aspect;
-            const distance = fitOffset * Math.max( fitHeightDistance, fitWidthDistance );
-            
-            const direction = controls.target.clone()
-            .sub( camera.position )
-            .normalize()
-            .multiplyScalar( distance );
-            
-            controls.maxDistance = distance * 10;
-            controls.target.copy( center );
-            
-            camera.near = distance / 100;
-            camera.far = distance * 100;
-            camera.updateProjectionMatrix();
-            
-            camera.position.copy( controls.target ).sub(direction);
-            
-            controls.update();
-            
-        }
-        
-        const loader = new THREE.OBJLoader();
+        //const loader = new THREE.OBJLoader();
         /*
         loader.load(
             $A.get('$Resource.Vase'), 
@@ -82,35 +74,11 @@
             } // Error
         );
         */
-        camera.position.z = 5;
+        this.camera.position.z = 5;
         
+        this.fitCameraToSelection([this.cube]);
         
-        const resize = function() {
-            width = container.offsetWidth;
-            height = container.offsetHeight;
-            console.log(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-            controls.update();
-        }
-        
-        const animate = function () {
-            requestAnimationFrame( animate );
-            
-            if (container.offsetWidth != width || container.offsetHeight != height) resize();
-            
-            this.cube.rotation.x += 0.01;
-            this.cube.rotation.y += 0.01;
-            
-            controls.update();
-            
-            renderer.render( scene, camera );
-        };
-
-        //fitCameraToSelection([this.cube]);
-        
-        animate();
+        this.animate();
 
     },
     /**
@@ -119,5 +87,17 @@
      * aufgerufen.
      */
     loadModel: function(component) {
+    },
+    /**
+     * Beim Resizen des Fensters passt diese Funktion das Seitenverhältnis
+     * der Kamera an.
+     */
+    resize: function() {
+        this.width = this.container.offsetWidth;
+        this.height = this.container.offsetHeight;
+        this.camera.aspect = this.width / this.height;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.width, this.height);
+        this.controls.update();
     },
 })
