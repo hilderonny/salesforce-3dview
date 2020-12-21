@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>RHTDV_ModelViewApexController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Permission to upload and edit 3D views of products</description>
     <fieldPermissions>
         <editable>true</editable>

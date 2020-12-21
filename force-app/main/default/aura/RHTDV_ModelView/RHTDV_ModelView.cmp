@@ -1,3 +1,50 @@
-<aura:component>
-    Hallo Welt!
-</aura:component>	
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="RHTDV_ModelViewApexController">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}" />
+
+    <aura:attribute name="filetype" type="List" default="['.zip']" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="canUpload" type="Boolean" default="false" />
+    <aura:attribute name="canView" type="Boolean" default="false" />
+    <aura:attribute name="showError" type="Boolean" default="false" />
+    <aura:attribute name="isUploading" type="Boolean" default="false" />
+    
+    <aura:if isTrue="{!v.canView}">
+
+        <!-- Einbinden von Ressourcen aus ZIP-Dateien: https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/expr_resource_value_provider.htm -->
+        <ltng:require scripts="{!join(',', $Resource.HaeR__RHTDV_ThreeJS + '/three.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OrbitControls.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OBJLoader2.min.js')}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+
+        <lightning:card iconName="doctype:image" title="3D Modell">
+    
+            <aura:set attribute="footer">
+
+                <aura:if isTrue="{!v.canUpload}">
+                    <aura:if isTrue="{!v.isUploading}">
+                        <lightning:fileUpload label="Modell hochladen" name="fileUploader" multiple="false" accept="{!v.filetype}" recordId="{!v.recordId}" onuploadfinished="{!c.handleUploadFinished}" />
+                        <lightning:button label="Abbrechen" onclick="{!c.handleClick}" />
+
+                        <aura:set attribute="else">
+                            <lightning:button label="Modell hochladen"/>
+                        </aura:set>
+        
+                    </aura:if>
+                </aura:if>
+        
+            </aura:set>
+            
+            <aura:if isTrue="{!v.showError}">
+                <div class="slds-grid slds-grid--align-center errormessage">
+                    <div class="slds-align-middle slds-col--padded">Die Modelldatei ist fehlerhaft und kann nicht angezeigt werden.</div>
+                </div>
+    
+                <aura:set attribute="else">
+                    <div aura:id="modelcontainer" id="modelcontainer" class="modelcontainer"></div>
+                </aura:set>
+    
+            </aura:if>
+            
+        </lightning:card>
+    
+    </aura:if>
+    
+</aura:component>
