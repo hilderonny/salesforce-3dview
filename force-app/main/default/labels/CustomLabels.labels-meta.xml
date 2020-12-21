@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>RHTDV_CancelButton</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Abbrechen Button</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_ErrorTitle</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Titel in Fehlermeldungen</shortDescription>
+        <value>Error!</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_ModelCorruptText</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fehlermeldung bei kaputten Modelldateien</shortDescription>
+        <value>The model file is corrupt and cannot be displayed.</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_ModelViewTitle</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Titel der Aura Komponente RHTDV_ModelView</shortDescription>
+        <value>3D Model</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_NoModelText</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Hinweis bei fehlendem Modell</shortDescription>
+        <value>The product has no model.</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_PleaseUploadModelText</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bitte um Modell-Hochladung</shortDescription>
+        <value>Please upload a model!</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_SuccessTitle</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Titel Erfolgsmeldung</shortDescription>
+        <value>Success!</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_UploadFailedText</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fehlermeldung beim Hochladen</shortDescription>
+        <value>An error occured while uploading. Please try again!</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_UploadModelButton</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Modell hochladen Button</shortDescription>
+        <value>Upload model</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_UploadModelLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Überschrift Dateiauswahl</shortDescription>
+        <value>Please select a model file:</value>
+    </labels>
+    <labels>
+        <fullName>RHTDV_UploadSuccessfulText</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Erfolgsmeldung nach Hochladen</shortDescription>
+        <value>The model was uploaded successfully.</value>
+    </labels>
+</CustomLabels>

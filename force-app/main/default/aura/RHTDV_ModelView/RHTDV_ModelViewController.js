@@ -98,14 +98,11 @@
         
         animate();
     },
-    handleClick : function(component, event, helper) {
-        var toastEvent = $A.get("e.force:showToast");
-        toastEvent.setParams({
-            type: 'error',
-            title: "Fehler!",
-            message: "Beim Hochladen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!"
-        });
-        toastEvent.fire();
+    /**
+     * Upload-Vorgang abbrechen
+     */
+    handleCancelClick : function(component) {
+        component.set('v.isUploading', false);
     },
     /**
      * Prüft Berechtigungen beim Initialisieren der Komponente
@@ -130,6 +127,20 @@
         }));
         $A.enqueueAction(canUploadAction);
     },
+    /**
+     * Upload-Vorgang starten und Dateiauswahlfeld anzeigen
+     */
+    handleUploadClick : function(component) {
+        component.set('v.isUploading', true);
+    },
+    /**
+     * Zeigt den Upload-Button nach erfolgtem Upload wieder an
+     * und reinitialisiert das 3D Modell.
+     */
     handleUploadFinished : function(component, event, helper) {
+        var successToastEvent = $A.get("e.force:showToast");
+        successToastEvent.setParams({ type: 'success', title: $A.get("$Label.HaeR.RHTDV_SuccessTitle"), message: $A.get("$Label.HaeR.RHTDV_UploadSuccessfulText") });
+        successToastEvent.fire();
+        component.set('v.isUploading', false);
     },
 })

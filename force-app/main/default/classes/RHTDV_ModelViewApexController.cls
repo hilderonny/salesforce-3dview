@@ -6,7 +6,8 @@ public with sharing class RHTDV_ModelViewApexController {
      */
     @AuraEnabled
     public static Boolean canUserViewModel() {
-        return true;
+        Schema.DescribeFieldResult dfr = Product2.HaeR__RHTDV_ModelDocument__c.getDescribe();
+        return dfr.isAccessible();
     }
     
     
@@ -16,7 +17,8 @@ public with sharing class RHTDV_ModelViewApexController {
      */
     @AuraEnabled
     public static Boolean canUserEditModel() {
-        return true;
+        Schema.DescribeFieldResult dfr = Product2.HaeR__RHTDV_ModelDocument__c.getDescribe();
+        return dfr.isUpdateable();
     }
     
 }

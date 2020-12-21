@@ -13,6 +13,10 @@
         <name>CustomFields</name>
     </types>
 	<types>
+		<members>*</members>
+		<name>CustomLabels</name>
+	</types>
+	<types>
 		<members>RHTDV_ModelEditor</members>
 		<members>RHTDV_ModelViewer</members>
 		<name>PermissionSet</name>

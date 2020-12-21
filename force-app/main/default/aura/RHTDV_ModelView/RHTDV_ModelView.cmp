@@ -8,23 +8,24 @@
     <aura:attribute name="canView" type="Boolean" default="false" />
     <aura:attribute name="showError" type="Boolean" default="false" />
     <aura:attribute name="isUploading" type="Boolean" default="false" />
+    <aura:attribute name="errorToShow" type="String" />
     
     <aura:if isTrue="{!v.canView}">
 
         <!-- Einbinden von Ressourcen aus ZIP-Dateien: https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/expr_resource_value_provider.htm -->
         <ltng:require scripts="{!join(',', $Resource.HaeR__RHTDV_ThreeJS + '/three.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OrbitControls.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OBJLoader2.min.js')}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
 
-        <lightning:card iconName="doctype:image" title="3D Modell">
+        <lightning:card iconName="doctype:image" title="{!$Label.c.RHTDV_ModelViewTitle}">
     
             <aura:set attribute="footer">
 
                 <aura:if isTrue="{!v.canUpload}">
                     <aura:if isTrue="{!v.isUploading}">
-                        <lightning:fileUpload label="Modell hochladen" name="fileUploader" multiple="false" accept="{!v.filetype}" recordId="{!v.recordId}" onuploadfinished="{!c.handleUploadFinished}" />
-                        <lightning:button label="Abbrechen" onclick="{!c.handleClick}" />
+                        <lightning:fileUpload label="{!$Label.c.RHTDV_UploadModelLabel}" name="fileUploader" multiple="false" accept="{!v.filetype}" recordId="{!v.recordId}" onuploadfinished="{!c.handleUploadFinished}" />
+                        <lightning:button label="{!$Label.c.RHTDV_CancelButton}" onclick="{!c.handleCancelClick}" />
 
                         <aura:set attribute="else">
-                            <lightning:button label="Modell hochladen"/>
+                            <lightning:button label="{!$Label.c.RHTDV_UploadModelButton}" onclick="{!c.handleUploadClick}"/>
                         </aura:set>
         
                     </aura:if>
@@ -34,7 +35,7 @@
             
             <aura:if isTrue="{!v.showError}">
                 <div class="slds-grid slds-grid--align-center errormessage">
-                    <div class="slds-align-middle slds-col--padded">Die Modelldatei ist fehlerhaft und kann nicht angezeigt werden.</div>
+                    <div class="slds-align-middle slds-col--padded">{!v.errorToShow}</div>
                 </div>
     
                 <aura:set attribute="else">
