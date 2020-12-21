@@ -60,6 +60,9 @@
         this.scene.add(this.cube);
 
         //const loader = new THREE.OBJLoader();
+
+        // Download-Link: /sfc/servlet.shepherd/document/download/CONTENTVERSIONID
+        // https://velocity-drive-5423-dev-ed.lightning.force.com/sfc/servlet.shepherd/document/download/0691X000001L1B6QAK?operationContext=S1
         /*
         loader.load(
             $A.get('$Resource.Vase'), 
