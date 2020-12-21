@@ -25,5 +25,9 @@
 		<members>RHTDV_ThreeJS</members>
 		<name>StaticResource</name>
 	</types>
+	<types>
+		<members>de</members>
+		<name>Translations</name>
+	</types>
     <version>50.0</version>
 </Package>

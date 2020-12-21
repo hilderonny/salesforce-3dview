@@ -1,5 +1,11 @@
 {
-  "orgName": "Demo company",
   "edition": "Developer",
-  "features": []
+  "language": "en_US",
+  "features": [],
+  "settings": {
+    "languageSettings": {
+      "enableTranslationWorkbench":  true,
+      "enableEndUserLanguages": true
+    }
+  }
 }

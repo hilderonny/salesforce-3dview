@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>Abbrechen</label>
+        <name>RHTDV_CancelButton</name>
+    </customLabels>
+    <customLabels>
+        <label>Fehler!</label>
+        <name>RHTDV_ErrorTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Die Modelldatei ist fehlerhaft und kann nicht angezeigt werden.</label>
+        <name>RHTDV_ModelCorruptText</name>
+    </customLabels>
+    <customLabels>
+        <label>3D Modell</label>
+        <name>RHTDV_ModelViewTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Das Produkt hat noch kein Modell.</label>
+        <name>RHTDV_NoModelText</name>
+    </customLabels>
+    <customLabels>
+        <label>Bitte laden Sie ein Modell hoch!</label>
+        <name>RHTDV_PleaseUploadModelText</name>
+    </customLabels>
+    <customLabels>
+        <label>Erfolg!</label>
+        <name>RHTDV_SuccessTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Beim Hochladen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!</label>
+        <name>RHTDV_UploadFailedText</name>
+    </customLabels>
+    <customLabels>
+        <label>Modell hochladen</label>
+        <name>RHTDV_UploadModelButton</name>
+    </customLabels>
+    <customLabels>
+        <label>Bitte wählen Sie eine Modelldatei aus:</label>
+        <name>RHTDV_UploadModelLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Das Modell wurde erfolgreich hochgeladen.</label>
+        <name>RHTDV_UploadSuccessfulText</name>
+    </customLabels>
+</Translations>
