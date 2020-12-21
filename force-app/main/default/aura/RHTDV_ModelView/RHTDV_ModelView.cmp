@@ -32,16 +32,13 @@
                 </aura:if>
         
             </aura:set>
+
+            <div aura:id="modelcontainer" id="modelcontainer" class="modelcontainer" style="{!v.showError ? 'visibility:hidden' : ''}"></div>
             
             <aura:if isTrue="{!v.showError}">
                 <div class="slds-grid slds-grid--align-center errormessage">
                     <div class="slds-align-middle slds-col--padded">{!v.errorToShow}</div>
                 </div>
-    
-                <aura:set attribute="else">
-                    <div aura:id="modelcontainer" id="modelcontainer" class="modelcontainer"></div>
-                </aura:set>
-    
             </aura:if>
             
         </lightning:card>
