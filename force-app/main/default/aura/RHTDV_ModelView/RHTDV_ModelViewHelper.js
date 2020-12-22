@@ -90,6 +90,29 @@
      * aufgerufen.
      */
     loadModel: function(component) {
+        const recordId = component.get('v.recordId');
+        var getModelAction = component.get("c.getModelData");
+        getModelAction.setParams({ productId: recordId });
+        getModelAction.setCallback(this, $A.getCallback(function(response) {
+            var state = response.getState();
+            if (state === "SUCCESS") {
+                const data = response.getReturnValue();
+                console.log(data);
+                // TODO: ZIPLoader für Base64 Strings umbauen: https://github.com/takahirox/THREE.ZipLoader/blob/master/build/ziploader.js
+                (new JSZip()).loadAsync(data, { base64: true }).then(function(zipContent) {
+                    console.log(zipContent);
+                });
+                /*
+                THREE.ZipLoadingManager.uncompress( url, [ '.gltf', '.glb' ] ).then( function ( zip ) {
+                    new THREE.GLTFLoader( zip.manager ).load( zip.urls[ 0 ], function ( gltf ) {
+                        console.log(this.scene);
+                        this.scene.add( gltf.scene );
+                    } );
+                } );
+                */
+            }
+        }));
+        $A.enqueueAction(getModelAction);
     },
     /**
      * Beim Resizen des Fensters passt diese Funktion das Seitenverhältnis

@@ -13,7 +13,7 @@
     <aura:if isTrue="{!v.canView}">
 
         <!-- Einbinden von Ressourcen aus ZIP-Dateien: https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/expr_resource_value_provider.htm -->
-        <ltng:require scripts="{!join(',', $Resource.HaeR__RHTDV_ThreeJS + '/three.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OrbitControls.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OBJLoader2.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/GLTFLoader.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/ZipLoader.min.js')}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+        <ltng:require scripts="{!join(',', $Resource.HaeR__RHTDV_ThreeJS + '/three.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OrbitControls.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/OBJLoader2.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/GLTFLoader.min.js', $Resource.HaeR__RHTDV_ThreeJS + '/JSZip.min.js')}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
 
         <lightning:card iconName="doctype:image" title="{!$Label.c.RHTDV_ModelViewTitle}">
     
