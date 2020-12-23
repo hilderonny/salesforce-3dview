@@ -53,9 +53,12 @@
         const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
         this.scene.add( directionalLight );
 
+        var hemiLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+        this.scene.add( hemiLight );
+
         // Würfel für Demo-Zwecke                
         const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
         this.cube = new THREE.Mesh( geometry, material );
         this.scene.add(this.cube);
 
@@ -91,16 +94,54 @@
      */
     loadModel: function(component) {
         const recordId = component.get('v.recordId');
+        const scene = this.scene;
         var getModelAction = component.get("c.getModelData");
         getModelAction.setParams({ productId: recordId });
         getModelAction.setCallback(this, $A.getCallback(function(response) {
             var state = response.getState();
             if (state === "SUCCESS") {
                 const data = response.getReturnValue();
-                console.log(data);
                 // TODO: ZIPLoader für Base64 Strings umbauen: https://github.com/takahirox/THREE.ZipLoader/blob/master/build/ziploader.js
                 (new JSZip()).loadAsync(data, { base64: true }).then(function(zipContent) {
-                    console.log(zipContent);
+
+
+                    // Von https://threejs.org/docs/#api/en/loaders/managers/LoadingManager
+
+                    const promises = [];
+                    const fileMap = {};
+                    let gltfFile;
+                    for (let [fileName, entry] of Object.entries(zipContent.files)) {
+                        if (fileName.endsWith('.gltf') || fileName.endsWith('.glb')) gltfFile = fileName;
+                        promises.push(entry.async('blob').then(function(fileName, blob) {
+                            fileMap[fileName] = URL.createObjectURL(blob);
+                        }.bind( this, fileName )));
+                    }
+                    Promise.all(promises).then(function() {
+
+                        console.log(fileMap);
+
+                        const manager = new THREE.LoadingManager();
+                        manager.setURLModifier( ( url ) => {
+                            if (url.startsWith('./')) url = url.substr(2); // In GLTF-Dateien werden die Referenze relativ mit "./" verlinkt. In der ZIP sind die Dateien aber so drin.
+                            let blob = fileMap[url];
+                            console.log(url, blob);
+                            return blob;
+                        } );
+
+                        const loader = new THREE.GLTFLoader( manager );
+                        loader.load( gltfFile, (gltf) => {
+                            console.log(gltf);
+                            scene.add( gltf.scene );
+                        });
+                    });
+
+
+
+
+
+
+
+
                 });
                 /*
                 THREE.ZipLoadingManager.uncompress( url, [ '.gltf', '.glb' ] ).then( function ( zip ) {

@@ -1,6 +1,8 @@
 ({
     afterScriptsLoaded: function(component, _, helper) {
         helper.initThreeJsScene(component);
+        // Modell laden
+        helper.loadModel(component);
     },
     /**
      * Upload-Vorgang abbrechen
@@ -28,8 +30,6 @@
                     }
                 }));
                 $A.enqueueAction(canUploadAction);
-                // Modell laden
-                helper.loadModel(component);
             }
         }));
         $A.enqueueAction(canViewAction);
