@@ -94,7 +94,7 @@
      */
     loadModel: function(component) {
         const recordId = component.get('v.recordId');
-        const scene = this.scene;
+        const self = this;
         var getModelAction = component.get("c.getModelData");
         getModelAction.setParams({ productId: recordId });
         getModelAction.setCallback(this, $A.getCallback(function(response) {
@@ -107,11 +107,20 @@
 
                     // Von https://threejs.org/docs/#api/en/loaders/managers/LoadingManager
 
+                    const manager = new THREE.LoadingManager();
+                    manager.setURLModifier( ( url ) => {
+                        if (url.startsWith('./')) url = url.substr(2); // In GLTF- und OBJ-Dateien werden die Referenze relativ mit "./" verlinkt. In der ZIP sind die Dateien aber so drin.
+                        let blob = fileMap[url];
+                        console.log(url, blob);
+                        return blob;
+                    } );
+
                     const promises = [];
                     const fileMap = {};
-                    let gltfFile;
+                    let gltfFile, objFile;
                     for (let [fileName, entry] of Object.entries(zipContent.files)) {
-                        if (fileName.endsWith('.gltf') || fileName.endsWith('.glb')) gltfFile = fileName;
+                        if (fileName.endsWith('.gltf')) gltfFile = fileName;
+                        if (fileName.endsWith('.obj')) objFile = fileName;
                         promises.push(entry.async('blob').then(function(fileName, blob) {
                             fileMap[fileName] = URL.createObjectURL(blob);
                         }.bind( this, fileName )));
@@ -120,19 +129,20 @@
 
                         console.log(fileMap);
 
-                        const manager = new THREE.LoadingManager();
-                        manager.setURLModifier( ( url ) => {
-                            if (url.startsWith('./')) url = url.substr(2); // In GLTF-Dateien werden die Referenze relativ mit "./" verlinkt. In der ZIP sind die Dateien aber so drin.
-                            let blob = fileMap[url];
-                            console.log(url, blob);
-                            return blob;
-                        } );
-
-                        const loader = new THREE.GLTFLoader( manager );
-                        loader.load( gltfFile, (gltf) => {
-                            console.log(gltf);
-                            scene.add( gltf.scene );
-                        });
+                        if (gltfFile) {
+                            const loader = new THREE.GLTFLoader( manager );
+                            loader.load( gltfFile, (gltf) => {
+                                console.log(gltf);
+                                self.scene.add( gltf.scene );
+                            });
+                        } else if (objFile) {
+                            const loader = new THREE.OBJLoader( manager );
+                            loader.load( objFile, (object3D) => {
+                                console.log(object3D);
+                                self.scene.add(object3D);
+                                self.fitCameraToSelection([object3D]);
+                            });
+                        }
                     });
 
 
